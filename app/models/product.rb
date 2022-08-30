@@ -19,6 +19,7 @@
 #  fk_rails_...  (product_category_id => product_categories.id)
 #
 class Product < ApplicationRecord
+  has_one_attached :image
   belongs_to :product_category
   has_many :order_products
 

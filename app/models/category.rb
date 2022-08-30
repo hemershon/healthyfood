@@ -8,6 +8,7 @@
 #  updated_at :datetime         not null
 #
 class Category < ApplicationRecord
+  has_one_attached :image
   has_many :restaurant
 
   validates :title, presence: true 

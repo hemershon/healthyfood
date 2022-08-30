@@ -30,6 +30,8 @@
 #  fk_rails_...  (category_id => categories.id)
 #
 class Restaurant < ApplicationRecord
+  has_one_attached :image
+
   belongs_to :category
   has_many :product_categories
   has_many :orders 
