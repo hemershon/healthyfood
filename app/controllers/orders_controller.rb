@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     if order.save
       render json:@order, status: :created
     else
-      render json: order.errors, status: :unprocesable_entity
+      render json: order.errors, status: :unprocessable_entity
     end
   end
 

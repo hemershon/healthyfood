@@ -14,7 +14,7 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.search(
       name_or_description_cont: params[:q]
     ).result 
-    @restaurants = @restaurants.near(parms[:city])
+    @restaurants = @restaurants.near(params[:city]) if params[:city]
     render json: @restaurants
   end
 
