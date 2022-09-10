@@ -21,6 +21,7 @@
 #  fk_rails_...  (restaurant_id => restaurants.id)
 #
 class Order < ApplicationRecord
+  before_validation :set_price 
   belongs_to :restaurant
   has_many :order_products
 
@@ -29,4 +30,17 @@ class Order < ApplicationRecord
   validates :total_value, presence: true
 
   enum status: { waiting: 0, delivered: 1 }
+  
+  accepts_nested_attributes_for :order_products, allow_destroy: true
+
+  private 
+
+  def set_price
+    @final_price = 0
+    order_products.each do |order_products|
+      product = Product.find order_products.product_id
+      @final_price += order_product.quantity * product.price 
+    end
+    self.total_value = @final_price
+  end
 end
