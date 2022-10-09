@@ -1,4 +1,37 @@
+# == Schema Information
+#
+# Table name: restaurants
+#
+#  id           :bigint           not null, primary key
+#  cep          :string
+#  city         :string
+#  complement   :string
+#  delivery_tax :float
+#  description  :text
+#  latitude     :float
+#  longitude    :float
+#  name         :string
+#  neighborhood :string
+#  number       :string
+#  reference    :string
+#  state        :string
+#  status       :integer
+#  street       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  category_id  :bigint           not null
+#
+# Indexes
+#
+#  index_restaurants_on_category_id  (category_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (category_id => categories.id)
+#
 class Restaurant < ApplicationRecord
+  has_one_attached :image
+
   belongs_to :category
   has_many :product_categories
   has_many :orders 
@@ -12,5 +45,12 @@ class Restaurant < ApplicationRecord
   validates :street, presence:true
 
   enum status: { closed: 0, open: 1 }
+
+  geocoded_by :address
+  after_validation :geocode
+
+  def address
+    [street, number, city, status].compact.join(',')
+  end
 
 end

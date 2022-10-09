@@ -15,6 +15,7 @@ gem 'ransack'
 gem 'geocoder', '~> 1.5', '>= 1.5.1'
 gem 'active_model_serializers', '~> 0.10.2'
 
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -52,6 +53,7 @@ group :development, :test do
   gem 'webmock'
   gem 'vcr'
   gem 'rails-controller-testing'
+  gem 'annotate'
 end
 
 group :development do
